@@ -1,0 +1,46 @@
+[
+  {
+    "id": 31,
+    "title": "The North Coat",
+    "category": "women",
+    "image": "/Jacket.png",
+    "price": 260,
+    "oldPrice": 360,
+    "salePercent": "",
+    "saleBg": "#f5f5f5",
+    "stars": 3.2
+  },
+  {
+    "id": 32,
+    "title": "Gussi Defulle Bag",
+    "category": "women",
+    "image": "/HandBag.png",
+    "price": 960,
+    "oldPrice": 1160,
+    "salePercent": "",
+    "saleBg": "#f5f5f5",
+    "stars": 4.5
+  },
+  {
+    "id": 33,
+    "title": "RGB liquid CPU Coller",
+    "category": "women",
+    "image": "/rgb.png",
+    "price": 160,
+    "oldPrice": 170,
+    "salePercent": "",
+    "saleBg": "#f5f5f5",
+    "stars": 3.5
+  },
+  {
+    "id": 34,
+    "title": "Small bookshelf",
+    "category": "women",
+    "image": "/BookSheif.png",
+    "price": 360,
+    "oldPrice": 350,
+    "salePercent": "",
+    "saleBg": "#f5f5f5",
+    "stars": 4.0
+  }
+]
