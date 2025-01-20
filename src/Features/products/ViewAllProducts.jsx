@@ -1,9 +1,11 @@
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import Card from "./Card";
+import { useProducts } from "../../Components/Helper/ProductContext";
 
 // eslint-disable-next-line react/prop-types
-export default function ViewAllProducts({ products }) {
+export default function ViewAllProducts() {
+    const {products} =useProducts()
   useEffect(() => {
     document.documentElement.scrollTo(0, 0);
   }, []);

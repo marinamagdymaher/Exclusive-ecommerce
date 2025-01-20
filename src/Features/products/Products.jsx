@@ -1,11 +1,14 @@
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import Card from "./Card";
 import Button from "../../Components/Button";
 import { faHeart, faEye } from "@fortawesome/free-solid-svg-icons";
+import { useProducts } from "../../Components/Helper/ProductContext";
 
 // eslint-disable-next-line react/prop-types
-export default function Products({ products }) {
+export default function Products() {
+  const { products } = useProducts();
   const limitProduct = products.slice(0, 8);
+  const navigate = useNavigate();
 
   return (
     <div className="flex justify-center flex-col">
@@ -26,9 +29,11 @@ export default function Products({ products }) {
       ) : (
         <p className="text-gray-500 mt-4">No products available.</p>
       )}
-      <NavLink to={"/products"} className="text-center">
-        <Button buttonTitle="View All Products" />
-      </NavLink>
+      <div className="text-center">
+      <Button
+        buttonTitle="View All Products"
+        handleButton={() => navigate("/products")}
+      /></div>
     </div>
   );
 }

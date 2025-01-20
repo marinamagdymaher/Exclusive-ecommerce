@@ -1,9 +1,11 @@
 import { useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import Card from "../../Features/products/Card";
+import { useProducts } from "../Helper/ProductContext";
 
-function AllProductCategory({ products }) {
+function AllProductCategory() {
   const { category } = useParams();
+    const {products} =useProducts()
 
   useEffect(() => {
     document.documentElement.scrollTo(0, 0);

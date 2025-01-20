@@ -13,7 +13,8 @@ const FormRegister = () => {
     wishlist: [],
     cart: [],
   });
-  const [errors, setErrors] = useState({});
+
+  const [error, setError] = useState({});
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -22,7 +23,7 @@ const FormRegister = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const validateForm = ValidateForm(formData, setErrors);
+    const validateForm = ValidateForm(formData, setError);
     if (!validateForm) return;
     const existingUsers = getLocalStorage() || [];
 
@@ -61,7 +62,7 @@ const FormRegister = () => {
           name="name"
           className="w-full p-3 border-b border-black  focus:ring-2 focus:ring-red-400"
         />
-        {errors.name && <p className="text-red-200">{errors.name}</p>}
+        {error.name && <p className="text-red-200">{error.name}</p>}
         <input
           onChange={handleInputChange}
           value={formData.email}
@@ -69,7 +70,7 @@ const FormRegister = () => {
           placeholder="Email or Phone Number"
           className="w-full p-3 border-b border-black  focus:ring-2 focus:ring-red-400"
         />
-        {errors.email && <p className="text-red-200">{errors.email}</p>}
+        {error.email && <p className="text-red-200">{error.email}</p>}
         <input
           value={formData.password}
           type="password"
@@ -78,7 +79,7 @@ const FormRegister = () => {
           placeholder="Password"
           className="w-full p-3 border-b border-black  focus:ring-2 focus:ring-red-400"
         />
-        {errors.password && <p className="text-red-200">{errors.password}</p>}
+        {error.password && <p className="text-red-200">{error.password}</p>}
         <button
           type="submit"
           className="w-full bg-red-200 hover:bg-red-600 text-white py-3 rounded-lg transition-all duration-200"

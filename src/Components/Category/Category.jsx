@@ -1,12 +1,11 @@
 import { useNavigate } from "react-router-dom";
 import "./Category.css";
 import { useEffect, useState } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCouch } from "@fortawesome/free-solid-svg-icons";
+import { useProducts } from "../Helper/ProductContext";
 
-export default function Category({ products }) {
+export default function Category() {
   const [categories, setCategories] = useState([]);
-
+  const { products } = useProducts();
   useEffect(() => {
     const uniqueCategories = [
       ...new Set(products.map((product) => product.category)),

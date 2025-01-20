@@ -131,7 +131,7 @@ function CustomerInteraction() {
       {customerContent.map((item, index) => (
         <div
           key={index}
-          className={`${item.bg} ${item.text} w-64 mx-auto flex flex-col items-center text-center p-6 border border-grey-300 rounded`}
+          className={`${item.bg} ${item.text} sm:w-64  flex flex-col items-center text-center p-6 border border-grey-300 rounded`}
         >
           <div className="rounded-full p-6 mb-4 bg-gray-100">
             <img

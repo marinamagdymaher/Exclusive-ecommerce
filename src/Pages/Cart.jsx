@@ -1,11 +1,19 @@
 import { NavLink } from "react-router-dom";
-import Table from "../Features/products/Table";
+import Table from "../Features/cart/Table";
+import BottomButton from "../Features/cart/BottomButton";
+import ApplyCoupon from "../Features/cart/ApplyCoupon";
+import CartTotal from "../Features/cart/CartTotal";
 
 export default function Cart() {
   return (
     <div className="px-5 my-[5rem]">
       <LinkContact />
       <Table />
+      <BottomButton />
+      <div className="flex flex-col md:flex-row justify-between items-start">
+        <ApplyCoupon />
+        <CartTotal />
+      </div>
     </div>
   );
 }

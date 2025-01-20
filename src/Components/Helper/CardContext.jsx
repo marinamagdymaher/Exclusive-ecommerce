@@ -1,13 +1,15 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import {
   getLocalStorage,
   setLocalStorage,
 } from "../../Features/user/LocalStorage2";
+import { useProducts } from "./ProductContext";
 
 // eslint-disable-next-line react-refresh/only-export-components
 export const CardContext = createContext();
 
-export const CardProvider = ({ children,products }) => {
+export const CardProvider = ({ children }) => {
+  const { products } = useProducts();
   const users = getLocalStorage();
   const loginUser = users.find((user) => user.token !== null);
   const wishlist = loginUser?.wishlist || [];
@@ -19,10 +21,9 @@ export const CardProvider = ({ children,products }) => {
 
   const [msg, setMsg] = useState("");
 
- 
   const deleteProduct = (id) => {
     const newList = listWishlist.filter((prd) => prd.id !== id);
-    console.log(newList)
+    console.log(newList);
     setListWishlist(newList);
     const updatedWishlist = {
       ...loginUser,
@@ -34,10 +35,55 @@ export const CardProvider = ({ children,products }) => {
     setLocalStorage(updatedUsers);
   };
 
+  const handleAddToWishlist = (prdId) => {
+    console.log(prdId);
+    if (!loginUser) {
+      setMsg("Please log in to add items to your wishlist.");
+      setTimeout(() => setMsg(""), 1000);
+      return;
+    }
+
+    if (listWishlist.some((item) => item.id === prdId)) {
+      setMsg("Product is already in your wishlist.");
+      setTimeout(() => setMsg(""), 1000);
+      return;
+    }
+    const product = products.find((p) => p.id === prdId);
+
+    const updatedWishlist = [...listWishlist, product];
+    setListWishlist(updatedWishlist);
+
+    const updatedUser = {
+      ...loginUser,
+      wishlist: [...listWishlist, updatedWishlist],
+    };
+    const updatedUsers = users.map((user) =>
+      user.token === loginUser.token ? updatedUser : user
+    );
+
+    setLocalStorage(updatedUsers);
+    setMsg("Add To Wishlist Successfully");
+
+    setTimeout(() => setMsg(""), 1000);
+  };
+
   const handleAddToCart = (productId) => {
-    console.log(productId)
+    // console.log(productId);
+
     const product = products.find((p) => p.id === productId);
-    console.log(product)
+
+    if (!product) {
+      alert("Product not found!");
+      return;
+    }
+    // console.log("cart",cart);
+    
+    const prdExist = userCart.some((cartItem) => cartItem.id === productId);
+    if (prdExist) {
+      alert("The product is already exist in the cart");
+      return;
+    }
+    // console.log(product);
     setCart((prevCart) => {
       const updatedCart = [...prevCart, product];
 
@@ -58,37 +104,29 @@ export const CardProvider = ({ children,products }) => {
     });
   };
 
-  const handleAddToWishlist = (prdId) => {
-    console.log(prdId);
-    if (!loginUser) {
-      setMsg("Please log in to add items to your wishlist.");
-      setTimeout(() => setMsg(""), 1000);
-      return;
+  const clearCart = () => {
+    let result = confirm("Are you sure you want to delete all cart?");
+    if (result) {
+      //Logic to delete the item
+      setCart([]);
+      console.log("userCart",userCart);
+      // const deleteAllCart = {
+      //   ...loginUser,
+      //   cart: [],
+      // };
+      // const updatedCart = users.map((user) =>
+      //   user.token === loginUser.token ? deleteAllCart : user
+      // );
+      // setLocalStorage(updatedCart);
+      console.log(cart);
     }
-
-    if (listWishlist.some((item) => item.id === prdId)) {
-      setMsg("Product is already in your wishlist.");
-      setTimeout(() => setMsg(""), 1000);
-      return;
-    }
-    const product = products.find((p) => p.id === prdId);
-
-    const updatedWishlist = [...listWishlist, product ];
-    setListWishlist(updatedWishlist)
-
-    const updatedUser = {
-      ...loginUser,
-      wishlist: [...listWishlist, updatedWishlist],
-    };
-    const updatedUsers = users.map((user) =>
-      user.token === loginUser.token ? updatedUser : user
-    );
-
-    setLocalStorage(updatedUsers);
-    setMsg("Add To Wishlist Successfully");
-
-    setTimeout(() => setMsg(""), 1000);
   };
+
+  useEffect(() => {
+    if (cart.length === 0) {
+      console.log("The cart is now empty.");
+    }
+  }, [cart]);
 
   return (
     <CardContext.Provider
@@ -98,6 +136,7 @@ export const CardProvider = ({ children,products }) => {
         deleteProduct,
         listWishlist,
         handleAddToWishlist,
+        clearCart,
         msg,
       }}
     >

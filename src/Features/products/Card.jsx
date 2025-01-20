@@ -39,19 +39,22 @@ export default function Card({ prd, icon = faTrash, secondIcon }) {
         </div>
         {prd.salePercent && (
           <div className="bg-red-200 w-16 h-8 rounded absolute top-4 left-4 text-center text-white">
-            {prd.salePercent}
+            {prd.salePercent} %
           </div>
         )}
       </div>
       <h2 className="text-lg font-semibold truncate">{prd.title}</h2>
+      <p className="flex gap-3">
+      {prd.salePercent && prd.price && (
+        <p>${(prd.price - (prd.price * prd.salePercent) / 100).toFixed(2)}</p>
+      )}
       {prd.price && (
-        <span className="text-red-100 pr-5">${prd.price.toFixed(2)}</span>
-      )}
-      {prd.oldPrice && (
-        <span className="text-grey-500 text-sm line-through">
-          ${prd.oldPrice}
+        <span
+          className={`pr-5 text-red-100 ${prd.salePercent && "line-through"}`}
+        >
+          ${prd.price.toFixed(2)}
         </span>
-      )}
+      )}</p>
     </div>
   );
 }

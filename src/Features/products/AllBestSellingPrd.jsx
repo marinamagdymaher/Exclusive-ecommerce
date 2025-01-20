@@ -1,8 +1,10 @@
 import { Link } from "react-router-dom";
 import Card from "./Card";
 import { useEffect } from "react";
+import { useProducts } from "../../Components/Helper/ProductContext";
 
-export default function AllBestSellingPrd({ products }) {
+export default function AllBestSellingPrd() {
+    const {products} =useProducts()
   useEffect(() => {
     document.documentElement.scrollTo(0, 0);
   }, []);

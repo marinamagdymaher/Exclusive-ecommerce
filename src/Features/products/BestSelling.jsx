@@ -1,11 +1,13 @@
-import { Link, NavLink } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Card from "./Card";
 import Button from "../../Components/Button";
-import { faHeart,faEye } from "@fortawesome/free-solid-svg-icons";
+import { faHeart, faEye } from "@fortawesome/free-solid-svg-icons";
+import { useProducts } from "../../Components/Helper/ProductContext";
 
-export default function BestSelling({ products }) {
+export default function BestSelling() {
+  const { products } = useProducts();
   const highRate = products.filter((prd) => prd.rating > 4).slice(0, 4);
-
+  const navigate = useNavigate();
   return (
     <div className="my-8">
       <div className="flex justify-between items-center">
@@ -16,15 +18,16 @@ export default function BestSelling({ products }) {
           </div>
           <h4 className="text-4xl font-bold mb-6">Best Selling Products</h4>
         </div>
-        <NavLink to={"/AllBestSellingPrd"} className="text-center">
-          <Button buttonTitle="View All" />
-        </NavLink>
+        <Button
+          buttonTitle="View All"
+          handleButton={() => navigate("/AllBestSellingPrd")}
+        />
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         {highRate.length > 0 ? (
           highRate.map((prd, i) => (
             <Link key={i} to={`/products/${prd.id}`}>
-              <Card prd={prd} icon={faHeart} secondIcon = {faEye}/>
+              <Card prd={prd} icon={faHeart} secondIcon={faEye} />
             </Link>
           ))
         ) : (

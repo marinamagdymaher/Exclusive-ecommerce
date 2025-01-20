@@ -7,11 +7,12 @@ import {
   faHeart,
 } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
-import { getLocalStorage, setLocalStorage } from "../user/LocalStorage2";
 import { useCart } from "../../Components/Helper/CardContext";
+import { useProducts } from "../../Components/Helper/ProductContext";
 
 // eslint-disable-next-line react/prop-types
-export default function SingleProduct({ products }) {
+export default function SingleProduct() {
+  const {products} =useProducts()
   const { productId } = useParams();
   const [counter, setCounter] = useState(1);
   const { handleAddToWishlist, msg } = useCart();

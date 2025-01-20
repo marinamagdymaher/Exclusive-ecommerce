@@ -10,47 +10,15 @@ import Login from "./Features/user/Login";
 import About from "./Pages/About";
 import SingleProduct from "./Features/products/SingleProduct";
 import ViewAllProducts from "./Features/products/ViewAllProducts";
-import { useEffect, useState } from "react";
 import Wishlist from "./Pages/Wishlist";
 import Logout from "./Features/user/Logout";
 import AllProductCategory from "./Components/Category/AllProductCategory";
 import AllBestSellingPrd from "./Features/products/AllBestSellingPrd";
 import { CardProvider } from "./Components/Helper/CardContext";
+import { TotalPriceProvider } from "./Components/Helper/TotalPriceContext";
+import { ProductProvider } from "./Components/Helper/ProductContext";
 
 function App() {
-  const [products, setProducts] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-
-  useEffect(() => {
-    const fetchProducts = async () => {
-      try {
-        const response = await fetch(`https://dummyjson.com/products`);
-        if (!response.ok) {
-          throw new Error("Failed to fetch products");
-        }
-        const data = await response.json();
-        const transformedProducts = data.products.map((prod) => ({
-          id: prod.id,
-          title: prod.title,
-          image: prod.images[0],
-          price: prod.price,
-          category: prod.category,
-          rating: prod.rating,
-        }));
-        setProducts(transformedProducts);
-      } catch (err) {
-        setError(err.message);
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchProducts();
-  }, []);
-
-  if (loading) return <div>Loading...</div>;
-  if (error) return <div>Error: {error}</div>;
-
   const router = createBrowserRouter([
     {
       element: <AppLayout />,
@@ -62,7 +30,7 @@ function App() {
       children: [
         {
           path: "/",
-          element: <Home products={products} />,
+          element: <Home />,
         },
         {
           path: "contacts",
@@ -70,7 +38,11 @@ function App() {
         },
         {
           path: "cart",
-          element: <Cart products={products} />,
+          element: (
+            <TotalPriceProvider>
+              <Cart />
+            </TotalPriceProvider>
+          ),
         },
         {
           path: "register",
@@ -90,34 +62,38 @@ function App() {
         },
         {
           path: "products/:productId",
-          element: <SingleProduct products={products} />,
+          element: (
+            <TotalPriceProvider>
+              <SingleProduct />
+            </TotalPriceProvider>
+          ),
         },
         {
           path: "category/:category",
-          element: <AllProductCategory products={products} />,
+          element: <AllProductCategory />,
         },
         {
           path: "products",
-          element: <ViewAllProducts products={products} />,
+          element: <ViewAllProducts />,
         },
         {
           path: "AllBestSellingPrd",
-          element: <AllBestSellingPrd products={products} />,
+          element: <AllBestSellingPrd />,
         },
         {
           path: "wishlist",
-          element: <Wishlist products={products} />,
+          element: <Wishlist />,
         },
       ],
     },
   ]);
 
   return (
-    <>
-        <CardProvider products={products}>
-          <RouterProvider router={router} />
-        </CardProvider>
-    </>
+    <ProductProvider>
+      <CardProvider>
+        <RouterProvider router={router} />
+      </CardProvider>
+    </ProductProvider>
   );
 }
 
