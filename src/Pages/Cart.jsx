@@ -6,7 +6,7 @@ import CartTotal from "../Features/cart/CartTotal";
 
 export default function Cart() {
   return (
-    <div className="px-5 my-[5rem]">
+    <div className="p-2 xs:px-5 my-[5rem]">
       <LinkContact />
       <Table />
       <BottomButton />

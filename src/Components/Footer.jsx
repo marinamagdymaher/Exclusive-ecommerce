@@ -1,4 +1,3 @@
-// import Logo from "./Logo";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faFacebookF,
@@ -6,6 +5,7 @@ import {
   faLinkedinIn,
   faInstagram,
 } from "@fortawesome/free-brands-svg-icons";
+import { Link } from "react-router-dom";
 
 export default function Footer() {
   return (
@@ -47,11 +47,22 @@ function TopFooter() {
       {/* Account Section */}
       <ul>
         <li className="font-bold py-2">Account</li>
-        <li className="py-2">My Account</li>
-        <li className="py-2">Login / Register</li>
-        <li className="py-2">Cart</li>
-        <li className="py-2">Wishlist</li>
-        <li className="py-2">Shop</li>
+        <li className="py-2">
+          <Link to="/profile">My Account</Link>
+        </li>
+        <li className="py-2">
+          <Link to="/register">Login / Register</Link>
+        </li>
+        <li className="py-2">
+          <Link to="/cart">Cart</Link>
+        </li>
+        <li className="py-2">
+          <Link to="/wishlist"> Wishlist</Link>
+        </li>
+        <li className="py-2">
+          <Link to="/products"></Link>
+          Shop
+        </li>
       </ul>
 
       {/* Quick Links Section */}
@@ -60,7 +71,9 @@ function TopFooter() {
         <li className="py-2">Privacy Policy</li>
         <li className="py-2">Terms of Use</li>
         <li className="py-2">FAQ</li>
-        <li className="py-2">Contact</li>
+        <li className="py-2">
+          <Link to="contacts">Contact</Link>
+        </li>
       </ul>
 
       {/* Download App Section */}

@@ -2,14 +2,13 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { getLocalStorage, setLocalStorage } from "./LocalStorage2";
 import { generateToken } from "./GenerateToken";
-import { useUser } from "../../Components/Helper/UserContext";
 
 export default function LoginForm() {
   const [login, setLogin] = useState({
     email: "",
     password: "",
   });
-  // const { setUser } = useUser();
+
   const [error, setError] = useState(null);
   const [successMessage, setSuccessMessage] = useState(null);
   const [token, setToken] = useState();
@@ -44,7 +43,6 @@ export default function LoginForm() {
         setLocalStorage(updatedUser);
         localStorage.setItem("token", token);
         setToken(token);
-        // setUser(updatedUser);
         setSuccessMessage("Login successful!");
         setError(null);
         navigate("/");

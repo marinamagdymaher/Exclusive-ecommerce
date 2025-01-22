@@ -44,7 +44,6 @@ const FormRegister = () => {
     const updatedUsers = [...existingUsers, formData];
 
     setLocalStorage(updatedUsers);
-    console.log(updatedUsers);
     alert("Account Created Successfully!");
     navigate("/login");
   };

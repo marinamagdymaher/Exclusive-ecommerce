@@ -7,7 +7,11 @@ import { useProducts } from "../../Components/Helper/ProductContext";
 // eslint-disable-next-line react/prop-types
 export default function Products() {
   const { products } = useProducts();
-  const limitProduct = products.slice(0, 8);
+  const productWithoutSalePercent = products.filter(
+    (prd) => prd.salePercent === false
+  );
+
+  const limitProduct = productWithoutSalePercent.slice(0, 8);
   const navigate = useNavigate();
 
   return (
@@ -30,10 +34,11 @@ export default function Products() {
         <p className="text-gray-500 mt-4">No products available.</p>
       )}
       <div className="text-center">
-      <Button
-        buttonTitle="View All Products"
-        handleButton={() => navigate("/products")}
-      /></div>
+        <Button
+          buttonTitle="View All Products"
+          handleButton={() => navigate("/products")}
+        />
+      </div>
     </div>
   );
 }

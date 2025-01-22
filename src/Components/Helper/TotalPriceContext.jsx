@@ -21,6 +21,7 @@ export const TotalPriceProvider = ({ children }) => {
     );
     setTotalPrice(totalPrice.toFixed(2));
   };
+  
   useEffect(() => {
     subTotal();
   }, [cart, quantities, subTotal]);

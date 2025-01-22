@@ -23,7 +23,14 @@ export const ProductProvider = ({ children }) => {
           category: prod.category,
           rating: prod.rating,
         }));
-        setProducts(transformedProducts);
+        const updatedProducts = transformedProducts.map((item) => {
+          // Add salePercent only if rating is below 3
+          return {
+            ...item,
+            salePercent: item.rating < 3 && 25,
+          };
+        });
+        setProducts(updatedProducts);
       } catch (err) {
         setError(err.message);
       } finally {
@@ -32,7 +39,6 @@ export const ProductProvider = ({ children }) => {
     };
     fetchProducts();
   }, []);
-
 
   return (
     <ProductContext.Provider value={{ products, loading, error }}>

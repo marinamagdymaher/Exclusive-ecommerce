@@ -8,7 +8,7 @@ export default function Button({
     // bg-red-200
     <button
       onClick={() => handleButton()}
-      className={`${colorBgButton} ${colorText} sm:truncate  border border-grey-300 font-semibold py-3 px-8 my-8 rounded`}
+      className={`${colorBgButton} ${colorText} xs:truncate  border border-grey-300 font-semibold p-3 xs:py-3 xs:px-8 my-8 rounded `}
     >
       {/* View All Products */}
       {buttonTitle}

@@ -1,4 +1,3 @@
-import { useUser } from "../../Components/Helper/UserContext";
 import { getLocalStorage, setLocalStorage } from "./LocalStorage2";
 
 export const handleLogout = () => {
@@ -6,7 +5,6 @@ export const handleLogout = () => {
   const token = localStorage.getItem("token");
 
 
-  console.log(users);
   if (!token) {
     console.log("No token found. User already logged out.");
     return;

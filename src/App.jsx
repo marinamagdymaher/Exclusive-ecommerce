@@ -17,6 +17,8 @@ import AllBestSellingPrd from "./Features/products/AllBestSellingPrd";
 import { CardProvider } from "./Components/Helper/CardContext";
 import { TotalPriceProvider } from "./Components/Helper/TotalPriceContext";
 import { ProductProvider } from "./Components/Helper/ProductContext";
+import Checkout from "./Pages/Checkout";
+import Profile from "./Pages/Profile";
 
 function App() {
   const router = createBrowserRouter([
@@ -35,6 +37,14 @@ function App() {
         {
           path: "contacts",
           element: <Contact />,
+        },
+        {
+          path: "checkout",
+          element: (
+            <TotalPriceProvider>
+              <Checkout />
+            </TotalPriceProvider>
+          ),
         },
         {
           path: "cart",
@@ -59,6 +69,10 @@ function App() {
         {
           path: "about",
           element: <About />,
+        },
+        {
+          path: "profile",
+          element: <Profile />,
         },
         {
           path: "products/:productId",

@@ -9,10 +9,11 @@ import {
 import { Link } from "react-router-dom";
 import { useCart } from "../../Components/Helper/CardContext";
 import { useProducts } from "../../Components/Helper/ProductContext";
+import Button from "../../Components/Button";
 
 // eslint-disable-next-line react/prop-types
 export default function SingleProduct() {
-  const {products} =useProducts()
+  const { products } = useProducts();
   const { productId } = useParams();
   const [counter, setCounter] = useState(1);
   const { handleAddToWishlist, msg } = useCart();
@@ -41,13 +42,13 @@ export default function SingleProduct() {
           />
         </div>
       </div>
-      <div className="flex h-96 flex-col gap-4">
+      <div className="flex  flex-col gap-4">
         <h1 className="text-3xl font-bold">{product.title}</h1>
         <p className="text-xl font-bold">${product.price.toFixed(2)}</p>
         <p className="text-gray-700">{product.description}</p>
         {msg && <p className="text-green-500">{msg}</p>}
         <hr />
-        <div className="flex items-center justify-between gap-4">
+        <div className="flex flex-col xs:flex-row items-center justify-between gap-4">
           <div className="flex items-center">
             <button
               onClick={decrement}
@@ -63,17 +64,17 @@ export default function SingleProduct() {
               +
             </button>
           </div>
-          <button className="bg-red-200 text-white w-64 px-10 py-2 rounded hover:bg-red-600 transition">
-            Buy Now
-          </button>
-          <Link>
-            <FontAwesomeIcon
-              onClick={() => handleAddToWishlist(product.id)}
-              icon={faHeart}
-              size="lg"
-              className="border rounded p-2 text-gray-500"
-            />
-          </Link>
+          <div className="flex items-center">
+            <Button buttonTitle="Buy Now" />
+            <Link>
+              <FontAwesomeIcon
+                onClick={() => handleAddToWishlist(product.id)}
+                icon={faHeart}
+                size="lg"
+                className="border rounded p-3 text-gray-500"
+              />
+            </Link>
+          </div>
         </div>
         <div className="border rounded-lg flex items-center gap-5 p-6">
           <FontAwesomeIcon icon={faTruckFast} size="2x" />

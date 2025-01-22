@@ -4,6 +4,7 @@ import { useCart } from "../../Components/Helper/CardContext";
 
 export default function BottomButton() {
   const { clearCart } = useCart();
+  
   return (
     <div className="flex justify-between  w-full">
       <Button

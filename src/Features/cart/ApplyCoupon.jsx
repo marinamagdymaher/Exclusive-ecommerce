@@ -2,7 +2,7 @@ import Button from "../../Components/Button";
 
 export default function ApplyCoupon() {
   return (
-    <div className="flex flex-col sm:flex-row items-center gap-2 mt-4">
+    <div className="flex flex-col sm:flex-row items-center xs:gap-2 mt-4">
       <input
         type="email"
         placeholder="Coupon Code"

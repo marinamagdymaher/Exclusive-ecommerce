@@ -7,14 +7,14 @@ export default function Table() {
   const { increment, decrement, quantities } = useTotalPrice();
   const { cart } = useCart();
   return (
-    <>
+    <div>
       {cart.length > 0 ? (
         <table className="w-full text-left">
           <thead className="border border-grey-300">
             <tr>
-              <th className="py-5 px-3 sm:px-6">Product</th>
+              <th className="py-5 px-3 xs:px-6">Product</th>
               <th>Price</th>
-              <th>Quantity</th>
+              <th className="pr-1">Quantity</th>
               <th>Subtotal</th>
             </tr>
           </thead>
@@ -29,7 +29,20 @@ export default function Table() {
                   />
                   <span className="md:truncate">{prdItem.title}</span>
                 </td>
-                <td>${prdItem.price.toFixed(2)}</td>
+                {/* <td>${prdItem.price.toFixed(2)}</td> */}
+                <td>
+                  {prdItem.salePercent ? (
+                    <p>
+                      $
+                      {(
+                        prdItem.price -
+                        (prdItem.price * prdItem.salePercent) / 100
+                      ).toFixed(2)}
+                    </p>
+                  ) : (
+                    <p>${prdItem.price.toFixed(2)}</p>
+                  )}
+                </td>
                 <td>
                   <span className="flex w-16 border justify-around items-center">
                     {quantities[prdItem.id]}
@@ -47,7 +60,7 @@ export default function Table() {
                     </div>
                   </span>
                 </td>
-                <td>${prdItem.price.toFixed(2) * quantities[prdItem.id]}</td>
+                <td>${(prdItem.price * quantities[prdItem.id]).toFixed(2)}</td>
               </tr>
             ))}
           </tbody>
@@ -57,6 +70,6 @@ export default function Table() {
           Your cart is now empty.
         </p>
       )}
-    </>
+    </div>
   );
 }

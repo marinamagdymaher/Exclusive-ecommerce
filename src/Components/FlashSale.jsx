@@ -14,22 +14,10 @@ export default function FlashSale({
   color = "text-red-200",
 }) {
   const { products } = useProducts();
-  const filtered = products
-    .filter((item) => item.rating < 3)
-    .map((item) => ({ ...item, salePercent: 25 }));
-  // console.log(filtered);
-  // const filtered = products.map((item) => {
-  //   let salePercent = 0;
-  //   if (item.rating < 2.8) {
-  //     salePercent = 15;
-  //   } else if (item.rating < 3) {
-  //     salePercent = 17;
-  //   } else if (item.rating < 3.5) {
-  //     salePercent = 25;
-  //   }
-  //   console.log(filtered)
-  //   return { ...item, salePercent }; // Attach salePercent to the product
-  // });
+  const filtered = products.filter((prd) => prd.salePercent !== false);
+
+
+
   return (
     <div className="my-8 border-b-2 border-grey-200">
       <div className="flex justify-between items-center">

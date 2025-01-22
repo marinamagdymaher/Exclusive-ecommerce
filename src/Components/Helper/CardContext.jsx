@@ -23,7 +23,6 @@ export const CardProvider = ({ children }) => {
 
   const deleteProduct = (id) => {
     const newList = listWishlist.filter((prd) => prd.id !== id);
-    console.log(newList);
     setListWishlist(newList);
     const updatedWishlist = {
       ...loginUser,
@@ -36,7 +35,6 @@ export const CardProvider = ({ children }) => {
   };
 
   const handleAddToWishlist = (prdId) => {
-    console.log(prdId);
     if (!loginUser) {
       setMsg("Please log in to add items to your wishlist.");
       setTimeout(() => setMsg(""), 1000);
@@ -68,22 +66,19 @@ export const CardProvider = ({ children }) => {
   };
 
   const handleAddToCart = (productId) => {
-    // console.log(productId);
-
     const product = products.find((p) => p.id === productId);
 
     if (!product) {
       alert("Product not found!");
       return;
     }
-    // console.log("cart",cart);
-    
+
     const prdExist = userCart.some((cartItem) => cartItem.id === productId);
     if (prdExist) {
       alert("The product is already exist in the cart");
       return;
     }
-    // console.log(product);
+
     setCart((prevCart) => {
       const updatedCart = [...prevCart, product];
 
@@ -97,36 +92,34 @@ export const CardProvider = ({ children }) => {
 
       setLocalStorage(updatedUsers);
 
-      console.log(`Product with ID ${productId} added to cart.`);
-      console.log(updatedCart);
-
       return updatedCart; // Return the new cart
     });
   };
 
   const clearCart = () => {
+    if (cart.length === 0) {
+      alert("The cart is now empty.");
+      return;
+    }
+
     let result = confirm("Are you sure you want to delete all cart?");
     if (result) {
       //Logic to delete the item
       setCart([]);
-      console.log("userCart",userCart);
-      // const deleteAllCart = {
-      //   ...loginUser,
-      //   cart: [],
-      // };
-      // const updatedCart = users.map((user) =>
-      //   user.token === loginUser.token ? deleteAllCart : user
-      // );
-      // setLocalStorage(updatedCart);
-      console.log(cart);
+
+      const updatedUser = {
+        ...loginUser,
+        cart: [],
+      };
+
+      const updatedUsers = users.map((user) =>
+        user.token === loginUser.token ? updatedUser : user
+      );
+      setLocalStorage(updatedUsers);
     }
   };
 
-  useEffect(() => {
-    if (cart.length === 0) {
-      console.log("The cart is now empty.");
-    }
-  }, [cart]);
+  useEffect(() => {}, [cart]);
 
   return (
     <CardContext.Provider
