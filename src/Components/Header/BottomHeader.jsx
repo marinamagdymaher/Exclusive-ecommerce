@@ -142,9 +142,7 @@ function Search() {
 }
 
 function LeftIcons({ closeMenu }) {
-  const [visibility, setVisibility] = useState(false);
-  
-  // const { visibility,setVisibility } = useUser();
+  const { visibility, setVisibility } = useUser();
   // const token = localStorage.getItem("token");
   // console.log(token);
   // useEffect(() => {
@@ -152,13 +150,12 @@ function LeftIcons({ closeMenu }) {
   //     setVisibility(true);
   //   }
   // }, [token, visibility]);
-  
+
+  const getToken = localStorage.getItem("token");
   useEffect(() => {
     // event.preventDefault();
-    const getToken = localStorage.getItem("token");
     setVisibility(!!getToken);
-  }, []);
-
+  }, [getToken, setVisibility]);
 
   return (
     <div className="flex items-center justify-center">
@@ -184,9 +181,9 @@ function LeftIcons({ closeMenu }) {
   );
 }
 
-function UserDropdown({ setVisibility }) {
+function UserDropdown() {
   const [isOpen, setIsOpen] = useState(false); // State to manage dropdown visibility
-
+  const { setVisibility } = useUser();
   const dropdownRef = useRef(null);
   const navigate = useNavigate();
 
