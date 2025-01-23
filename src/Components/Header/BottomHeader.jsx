@@ -176,7 +176,7 @@ function LeftIcons({ closeMenu }) {
           className="cursor-pointer hover:text-grey-500"
         />
       </Link>
-      {visibility && <UserDropdown setVisibility={setVisibility} />}
+      {visibility && <UserDropdown />}
     </div>
   );
 }
