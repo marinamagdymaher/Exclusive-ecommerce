@@ -11,7 +11,8 @@ import {
   faCircleXmark,
 } from "@fortawesome/free-solid-svg-icons";
 import { handleLogout } from "../../Features/user/Logout";
-// import { useUser } from "../Helper/UserContext";
+import { useUser } from "../Helper/UserContext";
+import { getLocalStorage } from "../../Features/user/LocalStorage2";
 
 export default function BottomHeader() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -142,12 +143,22 @@ function Search() {
 
 function LeftIcons({ closeMenu }) {
   const [visibility, setVisibility] = useState(false);
-
+  
+  // const { visibility,setVisibility } = useUser();
+  // const token = localStorage.getItem("token");
+  // console.log(token);
+  // useEffect(() => {
+  //   if (token) {
+  //     setVisibility(true);
+  //   }
+  // }, [token, visibility]);
+  
   useEffect(() => {
     // event.preventDefault();
     const getToken = localStorage.getItem("token");
     setVisibility(!!getToken);
   }, []);
+
 
   return (
     <div className="flex items-center justify-center">
@@ -175,6 +186,7 @@ function LeftIcons({ closeMenu }) {
 
 function UserDropdown({ setVisibility }) {
   const [isOpen, setIsOpen] = useState(false); // State to manage dropdown visibility
+
   const dropdownRef = useRef(null);
   const navigate = useNavigate();
 
@@ -204,14 +216,13 @@ function UserDropdown({ setVisibility }) {
     handleLogout();
     setVisibility(false);
     navigate("/login");
-    toggleDropdown()
-    // setUser("");
+    toggleDropdown();
   };
 
   const goToProfile = (e) => {
     e.preventDefault();
     navigate("/profile");
-    toggleDropdown()
+    toggleDropdown();
   };
 
   const list = [

@@ -19,6 +19,8 @@ import { TotalPriceProvider } from "./Components/Helper/TotalPriceContext";
 import { ProductProvider } from "./Components/Helper/ProductContext";
 import Checkout from "./Pages/Checkout";
 import Profile from "./Pages/Profile";
+import { UserProvider } from "./Components/Helper/UserContext";
+
 
 function App() {
   const router = createBrowserRouter([
@@ -105,7 +107,9 @@ function App() {
   return (
     <ProductProvider>
       <CardProvider>
-        <RouterProvider router={router} />
+        <UserProvider>
+          <RouterProvider router={router} />
+        </UserProvider>
       </CardProvider>
     </ProductProvider>
   );

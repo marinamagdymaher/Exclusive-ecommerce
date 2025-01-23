@@ -4,16 +4,16 @@ export const handleLogout = () => {
   const users = getLocalStorage();
   const token = localStorage.getItem("token");
 
-
   if (!token) {
     console.log("No token found. User already logged out.");
     return;
   }
-  const loginUser = users.map((user) =>
+
+  const updatedUsers = users.map((user) =>
     user.token === token ? { ...user, token: null } : user
   );
-
-  setLocalStorage(loginUser);
+  console.log(updatedUsers);
+  setLocalStorage(updatedUsers);
 
   localStorage.removeItem("token");
 

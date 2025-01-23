@@ -6,6 +6,7 @@ import { useProducts } from "../Components/Helper/ProductContext";
 // eslint-disable-next-line react/prop-types
 export default function AppLayout({ children }) {
   const { loading, error } = useProducts();
+
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error}</div>;
   return (

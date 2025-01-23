@@ -1,19 +1,12 @@
 import { NavLink, useNavigate } from "react-router-dom";
-import { useState } from "react";
-import { getLocalStorage, setLocalStorage } from "./LocalStorage2";
-import { generateToken } from "./GenerateToken";
+import { useUser } from "../../Components/Helper/UserContext";
 
 export default function LoginForm() {
-  const [login, setLogin] = useState({
-    email: "",
-    password: "",
-  });
 
-  const [error, setError] = useState(null);
-  const [successMessage, setSuccessMessage] = useState(null);
-  const [token, setToken] = useState();
   const navigate = useNavigate();
 
+  const { login, setLogin, error, token, successMessage, handleSubmitLogin } =
+    useUser();
   const handleChange = (e) => {
     const { name, value } = e.target;
     setLogin((prevState) => ({
@@ -22,37 +15,12 @@ export default function LoginForm() {
     }));
   };
 
-  const handleSubmitLogin = (e) => {
+  const goToHomePageAndLogin = (e) => {
     e.preventDefault();
-    const { email, password } = login;
-    // Input validation
-    if (!email || !password) {
-      setError("Please fill in all fields.");
-      return;
-    }
-    try {
-      const users = getLocalStorage();
-
-      const loginUser = users.find(
-        (user) => user.email === email && user.password === password
-      );
-
-      if (loginUser) {
-        const token = generateToken(loginUser);
-        const updatedUser = [{ ...loginUser, token }];
-        setLocalStorage(updatedUser);
-        localStorage.setItem("token", token);
-        setToken(token);
-        setSuccessMessage("Login successful!");
-        setError(null);
-        navigate("/");
-      }
-    } catch (error) {
-      console.log(error);
-      setError("Invalid email or password.");
-      setSuccessMessage(null);
-    }
+    handleSubmitLogin();
+    navigate("/");
   };
+
 
   return (
     <div className=" flex flex-col justify-center items-center gap-8 w-full md:w-1/2 p-8">
@@ -60,7 +28,7 @@ export default function LoginForm() {
       <h6 className=" mb-6 text-left">Enter your details below</h6>
       {!token && (
         <form
-          onSubmit={handleSubmitLogin}
+          onSubmit={goToHomePageAndLogin}
           className="w-full max-w-sm space-y-4"
         >
           <input
