@@ -11,17 +11,15 @@ import { useUser } from "../Components/Helper/UserContext";
 export default function Wishlist() {
   const { products } = useProducts();
   const { setVisibility } = useUser();
-
-
-  const getToken = localStorage.getItem("token");
+  const token = localStorage.getItem("token");
   const navigate = useNavigate();
   useEffect(() => {
     // event.preventDefault();
-    setVisibility(!!getToken);
-  }, [getToken, setVisibility]);
+    setVisibility(!!token);
+  }, [token, setVisibility]);
   return (
     <>
-      {getToken ? (
+      {token ? (
         <div className=" px-5 mt-[6rem]">
           <WishlistUser />
           <FlashSale

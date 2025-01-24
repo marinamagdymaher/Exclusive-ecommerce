@@ -12,6 +12,7 @@ export const CardProvider = ({ children }) => {
   const { products } = useProducts();
   const users = getLocalStorage();
   const loginUser = users.find((user) => user.token !== null);
+  const token = localStorage.getItem("token");
   const wishlist = loginUser?.wishlist || [];
   const userCart = loginUser?.cart || [];
 
@@ -35,7 +36,7 @@ export const CardProvider = ({ children }) => {
   };
 
   const handleAddToWishlist = (prdId) => {
-    if (!loginUser) {
+    if (!token) {
       setMsg("Please log in to add items to your wishlist.");
       setTimeout(() => setMsg(""), 1000);
       return;
@@ -120,7 +121,7 @@ export const CardProvider = ({ children }) => {
     }
   };
 
-  useEffect(() => {}, [cart]);
+  useEffect(() => {}, [cart, token]);
 
   return (
     <CardContext.Provider

@@ -9,16 +9,16 @@ import Button from "../Components/Button";
 
 export default function Cart() {
   const { setVisibility } = useUser();
-  const getToken = localStorage.getItem("token");
+  const token = localStorage.getItem("token");
   const navigate = useNavigate();
   useEffect(() => {
     // event.preventDefault();
-    setVisibility(!!getToken);
-  }, [getToken, setVisibility]);
+    setVisibility(!!token);
+  }, [token, setVisibility]);
 
   return (
     <div>
-      {getToken ? (
+      {token ? (
         <div className="p-2 xs:px-5 my-[5rem]">
           <LinkContact />
           <Table />

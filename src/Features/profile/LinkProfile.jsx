@@ -1,43 +1,47 @@
 export default function LinkProfile() {
-  return (//rounded-lg shadow-md
-    <div className="p-6 space-y-6 ">
-      {/* Manage My Account Section */}
-      <div>
-        <h2 className="text-lg font-semibold text-grey-800 mb-3">
-          Manage My Account
-        </h2>
-        <ul className="space-y-2 px-5">
-          <li className="text-grey-700  cursor-pointer">
-            My Profile
-          </li>
-          <li className="text-grey-700 cursor-pointer">
-            Address Book
-          </li>
-          <li className="text-grey-700 cursor-pointer">
-            My Payment Options
-          </li>
-        </ul>
-      </div>
+  const leftLinks = [
+    {
+      header: "Manage My Account",
+      link1: "My Profile",
+      link2: "Address Book",
+      link3: "My Payment Options",
+    },
+    {
+      header: "My Orders",
+      link1: "My Returns",
+      link2: "My Cancellations",
+    },
+    {
+      header: "My Wishlist",
+    },
+  ];
 
-      {/* My Orders Section */}
-      <div>
-        <h2 className="text-lg font-semibold text-grey-800 mb-3">My Orders</h2>
-        <ul className="space-y-2 px-5">
-          <li className="text-grey-700  cursor-pointer">
-            My Returns
-          </li>
-          <li className="text-grey-700  cursor-pointer">
-            My Cancellations
-          </li>
-        </ul>
-      </div>
-
-      {/* Wishlist Section */}
-      <div>
-        <h2 className="text-lg font-semibold text-grey-800 mb-3">
-          My Wishlist
-        </h2>
-      </div>
+  return (
+    <div className="p-6 space-y-6">
+      {leftLinks.map((item, i) => (
+        <div key={i}>
+          <h2 className="text-lg font-semibold text-grey-800 mb-3">
+            {item.header}
+          </h2>
+          <ul className="space-y-2 px-5">
+            {item.link1 && (
+              <li className="text-red-200 cursor-pointer hover:underline">
+                {item.link1}
+              </li>
+            )}
+            {item.link2 && (
+              <li className="text-grey-500 cursor-pointer hover:underline">
+                {item.link2}
+              </li>
+            )}
+            {item.link3 && (
+              <li className="text-grey-500 cursor-pointer hover:underline">
+                {item.link3}
+              </li>
+            )}
+          </ul>
+        </div>
+      ))}
     </div>
   );
 }

@@ -1,8 +1,14 @@
 import Button from "../../Components/Button";
+// import { getLocalStorage } from "../user/LocalStorage2";
+
 export default function ProfileForm() {
+  // const users = getLocalStorage();
+  // const loginUser = users.map((user) => (user.token !== null ? user : ""));
+
+  // console.log(loginUser);
   return (
     <div className="flex flex-col justify-between bg-white p-8 rounded-lg shadow-md">
-      <h4 className="text-xl font-semibold text-grey-800 mb-6">
+      <h4 className="text-xl font-semibold text-red-200 mb-6">
         Edit Your Profile
       </h4>
       <form className="space-y-6">
@@ -11,7 +17,7 @@ export default function ProfileForm() {
           <div className="flex-1">
             <label
               htmlFor="fname"
-              className="block mb-2 font-medium text-gray-700"
+              className="block mb-2 font-medium text-grey-700"
             >
               First Name
             </label>
@@ -25,7 +31,7 @@ export default function ProfileForm() {
           <div className="flex-1">
             <label
               htmlFor="lname"
-              className="block mb-2 font-medium text-gray-700"
+              className="block mb-2 font-medium text-grey-700"
             >
               Last Name
             </label>
@@ -101,7 +107,7 @@ export default function ProfileForm() {
         {/* Buttons */}
         <div className="flex justify-start gap-4">
           <Button
-            colorBgButton="bg-gray-200"
+            colorBgButton="bg-secondary"
             colorText="text-black"
             buttonTitle="Cancel"
           />
