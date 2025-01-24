@@ -1,24 +1,46 @@
-import Card from "../Features/products/Card";
+import { useEffect } from "react";
+import Button from "../Components/Button";
 import FlashSale from "../Components/FlashSale";
-import { useCart } from "../Components/Helper/CardContext";
+
 import { useProducts } from "../Components/Helper/ProductContext";
+import WishlistUser from "../Features/wishlist/WishlistUser";
+import { useNavigate } from "react-router-dom";
+import { useUser } from "../Components/Helper/UserContext";
+
 
 export default function Wishlist() {
-  const { listWishlist } = useCart();
-    const {products} =useProducts()
+  const { products } = useProducts();
+  const { setVisibility } = useUser();
+
+
+  const getToken = localStorage.getItem("token");
+  const navigate = useNavigate();
+  useEffect(() => {
+    // event.preventDefault();
+    setVisibility(!!getToken);
+  }, [getToken, setVisibility]);
   return (
-    <div className=" px-5 mt-[6rem]">
-      <h4 className="text-3xl font-bold ">Wishlist ({listWishlist.length})</h4>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 ">
-        {listWishlist.map((prd, i) => (
-          <Card prd={prd} key={i} />
-        ))}
-      </div>
-      <FlashSale
-        products={products}
-        smallTitle="Just For You"
-        color="text-black"
-      ></FlashSale>
-    </div>
+    <>
+      {getToken ? (
+        <div className=" px-5 mt-[6rem]">
+          <WishlistUser />
+          <FlashSale
+            products={products}
+            smallTitle="Just For You"
+            color="text-black"
+          ></FlashSale>
+        </div>
+      ) : (
+        <div className="my-[8rem] flex flex-col items-center justify-center bg-gray-100">
+          <p className="text-2xl font-bold text-grey-700 mb-4">
+            Sorry, you are not loggedIn.
+          </p>
+          <Button
+            buttonTitle="Go to Login"
+            handleButton={() => navigate("/login")}
+          />
+        </div>
+      )}
+    </>
   );
 }

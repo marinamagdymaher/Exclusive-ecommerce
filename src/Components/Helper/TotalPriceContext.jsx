@@ -6,16 +6,16 @@ export const TotalPriceContext = createContext();
 export const TotalPriceProvider = ({ children }) => {
   const { cart } = useCart();
   const [quantities, setQuantities] = useState(
-    cart.reduce((acc, item) => ({ ...acc, [item.id]: 1 }), {})
+    cart?.reduce((acc, item) => ({ ...acc, [item.id]: 1 }), {})
   );
 
   const [totalPrice, setTotalPrice] = useState(
-    cart.reduce((acc, item) => acc + item.price * 1, 0)
+    cart?.reduce((acc, item) => acc + item.price * 1, 0)
   );
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const subTotal = () => {
-    const totalPrice = cart.reduce(
+    const totalPrice = cart?.reduce(
       (acc, item) => acc + item.price * quantities[item.id],
       0
     );

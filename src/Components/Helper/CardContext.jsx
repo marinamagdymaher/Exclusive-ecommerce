@@ -46,6 +46,7 @@ export const CardProvider = ({ children }) => {
       setTimeout(() => setMsg(""), 1000);
       return;
     }
+
     const product = products.find((p) => p.id === prdId);
 
     const updatedWishlist = [...listWishlist, product];
@@ -53,7 +54,7 @@ export const CardProvider = ({ children }) => {
 
     const updatedUser = {
       ...loginUser,
-      wishlist: [...listWishlist, updatedWishlist],
+      wishlist: updatedWishlist,
     };
     const updatedUsers = users.map((user) =>
       user.token === loginUser.token ? updatedUser : user
@@ -124,6 +125,7 @@ export const CardProvider = ({ children }) => {
   return (
     <CardContext.Provider
       value={{
+        wishlist,
         cart,
         handleAddToCart,
         deleteProduct,
