@@ -1,23 +1,14 @@
-import Card from "../Features/products/Card";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faArrowRight,
-  faArrowLeft,
-  faHeart,
-  faEye,
-} from "@fortawesome/free-solid-svg-icons";
-import { useProducts } from "./Helper/ProductContext";
+import { faArrowRight, faArrowLeft } from "@fortawesome/free-solid-svg-icons";
+
+import SimpleSlider from "./SimpleSlider";
+import ButtonSlider from "./ButtonSlider";
+import CountdownTimer from "./CountDwnTimer";
 
 export default function FlashSale({
   smallTitle,
   mainTitle,
   color = "text-red-200",
 }) {
-  const { products } = useProducts();
-  const filtered = products.filter((prd) => prd.salePercent !== false);
-
-
-
   return (
     <div className="my-8 border-b-2 border-grey-200">
       <div className="flex justify-between items-center">
@@ -28,33 +19,14 @@ export default function FlashSale({
           </div>
           <h4 className="text-4xl font-bold mb-6">{mainTitle}</h4>
         </div>
-        {/* <ArrowIcons /> */}
+        <CountdownTimer targetDate="2025-01-31T23:59:59" />
+
         <div>
-          <span className="bg-secondary p-2 rounded-full mr-2">
-            <FontAwesomeIcon icon={faArrowLeft} /> {/* Left Arrow */}
-          </span>
-          <span className="bg-secondary p-2 rounded-full">
-            <FontAwesomeIcon icon={faArrowRight} /> {/* Right Arrow */}
-          </span>
+          <ButtonSlider icon={faArrowLeft} />
+          <ButtonSlider icon={faArrowRight} />
         </div>
       </div>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-        {filtered.length > 0 ? (
-          filtered.map((prd, i) => (
-            <Card
-              key={i}
-              prd={prd}
-              icon={faHeart}
-              secondIcon={faEye}
-              salePercent={prd.salePercent}
-            />
-          ))
-        ) : (
-          <p className="col-span-4 text-center text-grey-500">
-            No products available.
-          </p>
-        )}
-      </div>
+      <SimpleSlider />
     </div>
   );
 }

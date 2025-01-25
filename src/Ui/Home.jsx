@@ -7,10 +7,8 @@ import { faAngleRight } from "@fortawesome/free-solid-svg-icons";
 import BestSelling from "../Features/products/BestSelling";
 import FlashSale from "../Components/FlashSale";
 
-
 // eslint-disable-next-line react/prop-types
 export default function Home() {
-
   return (
     <div className="px-5 py-10">
       <div className="flex justify-between mt-6 gap-4">

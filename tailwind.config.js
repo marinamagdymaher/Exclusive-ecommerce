@@ -40,5 +40,7 @@ export default {
       50: "50%",
     },
   },
-  plugins: [],
+  
+  // eslint-disable-next-line no-undef
+  plugins: [  require('tailwind-scrollbar-hide'),],
 };
