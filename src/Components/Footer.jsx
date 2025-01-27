@@ -21,23 +21,23 @@ function TopFooter() {
   return (
     <div className="grid grid-cols-1 xs:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 p-5">
       {/* Logo Section */}
-      <div className="w-64">
+      <div className="xs:w-64">
         {/* <Logo /> */}
         <h4 className="text-2xl font-bold">Exclusive</h4>
         <button className=" text-white py-2 rounded">Subscribe</button>
         <p>Get 10% off your first order</p>
 
-        <div className="flex items-center gap-2 mt-4 w-24">
+        <div className="flex items-center gap-2 mt-4 w-1 xs:w-24">
           <input
             type="email"
             placeholder="Enter Your Email Address"
-            className="p-2 rounded border border-grey-300 flex-grow bg-black text-white"
+            className="p-2 rounded border border-grey-300 text-sm flex-grow bg-black text-white"
           />
         </div>
       </div>
 
       {/* Support Section */}
-      <ul className="w-48">
+      <ul className="xs:w-48">
         <li className="font-bold py-2">Support</li>
         <li className="py-2">111 Bijoy Sarani, Dhaka, DH 1515, Bangladesh</li>
         <li className="py-2">exclusive@gmail.com</li>
@@ -77,7 +77,7 @@ function TopFooter() {
       </ul>
 
       {/* Download App Section */}
-      <div className="w-64">
+      <div className="xs:w-64">
         <h5 className="font-bold py-2">Download App</h5>
         <p className="py-2">Save $3 with App New Users Only</p>
         <div className="mt-4">
@@ -95,7 +95,7 @@ function TopFooter() {
 
 function SocialMedia() {
   return (
-    <div className="flex py-5 gap-6">
+    <div className="flex items-center justify-between  xs:w-64 py-5 gap-1 xs:gap-6">
       <a
         href="https://facebook.com"
         target="_blank"

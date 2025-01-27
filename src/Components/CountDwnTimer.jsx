@@ -32,18 +32,18 @@ export default function CountdownTimer({ targetDate }) {
   // Format the countdown for display
   const timerComponents = Object.keys(timeLeft).map(
     (interval, index, array) => (
-      <div key={interval} className="flex items-center gap-4">
-        <div>
-          <span className="text-sm  font-semibold">
+      <div key={interval} className="flex items-center xs:gap-4 ">
+        <div >
+          <span className="text-sm  xs:font-semibold">
             {interval.charAt(0).toUpperCase() + interval.slice(1)}
           </span>
 
-          <p className="text-3xl font-bold">
+          <p className="xs:text-3xl xs:font-bold">
             {timeLeft[interval]?.toString().padStart(2, "0") || "00"}
           </p>
         </div>
         {index < array.length - 1 && (
-          <span className="text-2xl font-bold text-red-200">:</span>
+          <span className="xs:text-2xl font-bold text-red-200">:</span>
         )}
       </div>
     )

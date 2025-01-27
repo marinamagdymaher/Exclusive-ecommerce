@@ -76,7 +76,7 @@ export default function SingleProduct() {
             </Link>
           </div>
         </div>
-        <div className="border rounded-lg flex items-center gap-5 p-6">
+        <div className="border rounded-lg flex flex-col xs:flex-row items-center gap-5 p-6">
           <FontAwesomeIcon icon={faTruckFast} size="2x" />
           <div>
             <h5 className="font-semibold">Free Delivery</h5>
@@ -85,7 +85,7 @@ export default function SingleProduct() {
             </p>
           </div>
         </div>
-        <div className="border rounded-lg flex items-center gap-5 p-6">
+        <div className="border rounded-lg flex flex-col xs:flex-row items-center gap-5 p-6">
           <FontAwesomeIcon icon={faRightLeft} size="2x" />
           <div>
             <h5 className="font-semibold">Return Delivery</h5>

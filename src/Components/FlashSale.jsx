@@ -11,7 +11,7 @@ export default function FlashSale({
 }) {
   return (
     <div className="my-8 border-b-2 border-grey-200">
-      <div className="flex justify-between items-center">
+      <div className="flex flex-col sm:flex-row justify-between items-center">
         <div>
           <div className="text-red-200 font-semibold flex gap-5 py-5">
             <span className="border-8  "></span>
